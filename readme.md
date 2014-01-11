@@ -17,6 +17,8 @@ npm install -g kw
 ➜ cat /some/file | kw > /some/other/file
 ```
 
+## Usage
+
 ```
 ➜  kw
 Usage: node ./kw file

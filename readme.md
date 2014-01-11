@@ -1,6 +1,6 @@
 # kill whitespace
 
-Kill whitespace from the command line.
+Kill dead whitespace from the command line.
 
 ## Installation
 

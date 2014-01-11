@@ -29,13 +29,13 @@ if (argv._.length) {
     glob(path.join(argv._[0], '/**/*.{' + defaultTypes.join(',') + '}'), function(err, files) {
       files.forEach(function(file) {
         fs.readFile(file, function(err, data) {
-          converter(fs.createWriteStream(file))(data);
+          if (!err) converter(fs.createWriteStream(file))(data);
         });
       });
     });
   } else {
     fs.readFile(argv._[0], function(err, data) {
-      converter(fs.createWriteStream(argv._[0]))(data);
+      if (!err) converter(fs.createWriteStream(argv._[0]))(data);
     });
   }
 } else {
@@ -44,6 +44,6 @@ if (argv._.length) {
 
 function converter(output) {
   return function(data) {
-    output.write(kw(data.toString()));
+    if (data) output.write(kw(data.toString()));
   }
 }

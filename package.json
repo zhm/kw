@@ -1,6 +1,6 @@
 {
   "name": "kw",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "kill whitespace",
   "main": "index.js",
   "scripts": {

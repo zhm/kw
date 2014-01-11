@@ -1,0 +1,49 @@
+#!/usr/bin/env node
+
+var kw = require('./'),
+    concat = require('concat-stream'),
+    glob = require('glob'),
+    path = require('path'),
+    fs = require('fs');
+
+var defaultTypes = ['rb', 'sass', 'js', 'coffee', 'jade', 'haml', 'html', 'rake', 'json', 'txt', 'md'];
+
+var opt = require('optimist').usage('Usage: $0 file')
+                             .alias('t', 'type')
+                             .describe('t', 'File types to include. The defaults are ' + defaultTypes.join(', '))
+
+var argv = opt.argv;
+var filename = argv._[0] || ''
+
+if (process.stdin.isTTY && !argv._[0]) return opt.showHelp();
+
+if (argv._.length) {
+  if (fs.lstatSync(argv._[0]).isDirectory()) {
+    var types = defaultTypes;
+
+    if (typeof(argv.type) === 'string')
+      types = [argv.type];
+    else if (argv.type)
+      types = argv.type;
+
+    glob(path.join(argv._[0], '/**/*.{' + defaultTypes.join(',') + '}'), function(err, files) {
+      files.forEach(function(file) {
+        fs.readFile(file, function(err, data) {
+          converter(fs.createWriteStream(file))(data);
+        });
+      });
+    });
+  } else {
+    fs.readFile(argv._[0], function(err, data) {
+      converter(fs.createWriteStream(argv._[0]))(data);
+    });
+  }
+} else {
+  process.stdin.pipe(concat(converter(process.stdout)));
+}
+
+function converter(output) {
+  return function(data) {
+    output.write(kw(data.toString()));
+  }
+}

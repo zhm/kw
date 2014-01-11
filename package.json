@@ -1,0 +1,29 @@
+{
+  "name": "kw",
+  "version": "0.0.1",
+  "description": "kill whitespace",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "author": "Zac McCormick",
+  "license": "BSD",
+  "dependencies": {
+    "concat-stream": "*",
+    "optimist": "*",
+    "glob": "*"
+  },
+  "devDependencies": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhm/kw.git"
+  },
+  "bin": {
+    "kw": "kw"
+  },
+  "bugs": {
+    "url": "https://github.com/zhm/kw/issues"
+  },
+  "homepage": "https://github.com/zhm/kw"
+}

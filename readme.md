@@ -21,7 +21,7 @@ npm install -g kw
 
 ```
 ➜  kw
-Usage: node ./kw file
+Usage: kw file
 
 Options:
   -t, --type  File types to include. The defaults are rb, sass, js, coffee, jade, haml, html, rake, json, txt, md
